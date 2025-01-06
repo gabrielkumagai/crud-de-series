@@ -12,7 +12,11 @@
 
     {% for season in seasonsss %}
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        Temporada {{ season.number }}
+
+        <a href="{{ path('app_episodes', {season: season.id}) }}">
+    Temporada {{ season.number }}
+</a>
+
         {#{ dump(season) }#}
         <span class="badge bg-secondary">{{ season.episodes|length }}</span>
     </li>
