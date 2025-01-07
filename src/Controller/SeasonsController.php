@@ -19,7 +19,7 @@ class SeasonsController extends AbstractController
     }
 
     #[Route('/series/{series}/seasons', name: 'app_seasons')]
-    public function index( Series $series,): Response
+    public function index(Series $series,): Response
     {
         $num = 0;
         $seasonsss = $this->cache->get(
@@ -34,12 +34,7 @@ class SeasonsController extends AbstractController
                 return $seasonsss->getValues();
             }
         );
-                
+
         return $this->render('seasons/index.html.twig', compact('series', 'seasonsss', 'num'));
     }
-        
-    }
-    
-
-
-
+}

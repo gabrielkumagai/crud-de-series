@@ -5,6 +5,7 @@ use App\Repository\EpisodeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EpisodeRepository::class)]
+#[ORM\Cache]
 class Episode 
 {
     #[ORM\Id]
@@ -22,16 +23,10 @@ class Episode
     #[ORM\Column(type: 'boolean')]
     private bool $watched = false;
 
-
-
-
-
     public function __construct(int $number)
     {
         $this->number = $number;
     }
-
-
     
     public function getId(): ?int
     {
@@ -46,6 +41,7 @@ class Episode
     public function setNumber(int $number): self
     {
         $this->number = $number;
+
         return $this;
     }
 
@@ -57,6 +53,7 @@ class Episode
     public function setSeason(?Season $season): self
     {
         $this->season = $season;
+
         return $this;
     }
 
@@ -70,4 +67,5 @@ class Episode
         $this->watched = $watched;
         return $this;
     }
+    
 }

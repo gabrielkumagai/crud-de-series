@@ -1,7 +1,5 @@
 <?php
 
-// faz basicamente as alterações no banco de dados
-
 namespace App\Repository;
 
 use App\Entity\Season;

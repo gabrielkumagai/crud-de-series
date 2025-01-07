@@ -1,4 +1,5 @@
 <?php
+/*
 
 declare(strict_types=1);
 
@@ -7,9 +8,8 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
+
+ 
 final class Version20250106145258 extends AbstractMigration
 {
     public function getDescription(): string
@@ -41,3 +41,5 @@ final class Version20250106145258 extends AbstractMigration
         $this->addSql('ALTER TABLE season DROP FOREIGN KEY FK_F0E45BA95278319C');
     }
 }
+
+*/

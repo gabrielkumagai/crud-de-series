@@ -18,7 +18,9 @@
 </a>
 
         {#{ dump(season) }#}
-        <span class="badge bg-secondary">{{ season.episodes|length }}</span>
+        <span class="badge bg-secondary">
+    {{season.watchedEpisodes|length }} / {{ season.episodes|length }}
+</span>
     </li>
     {% endfor %}
 </ul>

@@ -7,22 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-// define os campos da entidade, pro doctrine crie corretamente
-//é definido por exemplo se é many to ony
-
 #[ORM\Entity(repositoryClass: SeasonRepository::class)]
-
-
-
+#[ORM\Cache]
 class Season
 {
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-
     private int $id;
-
 
     #[ORM\OneToMany(
         mappedBy: 'season',
@@ -30,14 +22,11 @@ class Season
         orphanRemoval: true,
         cascade: ['persist']
     )]
-
-
+    #[ORM\Cache]
     private Collection $episodes;
 
     #[ORM\ManyToOne(targetEntity: Series::class, inversedBy: 'seasons')]
     #[ORM\JoinColumn(nullable: false)]
-
-
     private Series $series;
 
     public function __construct(
@@ -47,19 +36,10 @@ class Season
         $this->episodes = new ArrayCollection();
     }
 
-
-
-
-
-
-//getters e setters 
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
-
 
     public function getNumber(): ?int
     {
@@ -73,16 +53,20 @@ class Season
         return $this;
     }
 
-
-
+    /**
+     * @return Collection<int, Episode>
+     */
+    public function getEpisodes(): Collection
+    {
+        return $this->episodes;
+    }
 
     /**
      * @return Collection<int, Episode>
      */
-
-    public function getEpisodes(): Collection
+    public function getWatchedEpisodes(): Collection
     {
-        return $this->episodes;
+        return $this->episodes->filter(fn (Episode $episode) => $episode->isWatched());
     }
 
     public function addEpisode(Episode $episode): self
@@ -106,7 +90,6 @@ class Season
 
         return $this;
     }
-    
 
     public function getSeries(): ?Series
     {
@@ -119,4 +102,8 @@ class Season
 
         return $this;
     }
+
+
+
+
 }
